@@ -20,7 +20,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Área</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Data de Criação</th>
+<!--                    <th scope="col">Data de Criação</th>-->
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -32,7 +32,7 @@
                     <td class="col-4" th:text="${project.getName()}">Nome do Projeto</td>
                     <td class="col-2" th:text="${project.getProjectArea()}">Área</td>
                     <td class="col-2" th:text="${project.getProjectStatus()}">Status</td>
-                    <td class="col-1" th:text="${project.getCreationDate()}">Criação</td>
+<!--                    <td class="col-1" th:text="${project.getCreationDate()}">Criação</td>-->
                     <td class="col-1"><a href="#">Detalhes</a></td>
                     <td class="col-1"><a href="#">Editar</a></td>
                     <td class="col-1"><a href="#">Deletar</a></td>
@@ -44,6 +44,7 @@
                     crossorigin="anonymous"></script>
         </div>
     </div>
+        <a href="/projects/new">Adicionar um Projeto</a>
     </div>
 </div>
 </body>
