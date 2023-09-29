@@ -1,8 +1,10 @@
 package com.example.DataCompanyWeb.controllers;
 
 
+import com.example.DataCompanyWeb.DTO.NewProjectDTO;
 import com.example.DataCompanyWeb.models.Project;
 import com.example.DataCompanyWeb.models.ProjectArea;
+import com.example.DataCompanyWeb.models.ProjectStatus;
 import com.example.DataCompanyWeb.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,8 +37,10 @@ public class ProjectController {
     }
 
     @PostMapping("/projects")
-    public String CreateProject(Project project){
-        
+    public String CreateProject(NewProjectDTO newProject){
+        Project project = newProject.toProject();
+        project.setProjectStatus(ProjectStatus.EM_ANDAMENTO);
+        this.projectRepository.save(project);
         return "redirect:/projects";
     }
 }

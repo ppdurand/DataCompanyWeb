@@ -15,28 +15,16 @@ public class Project {
     private String description;
     @Enumerated(EnumType.STRING)
     private ProjectArea projectArea;
-//    @Temporal(TemporalType.DATE)
-//    private Date creationDate;
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
     public Project() {}
 
-    public Project(Long id,String name, String description, ProjectArea projectArea, ProjectStatus projectStatus) {
-        this.Id = id;
+    public Project(String name, String description, ProjectArea projectArea) {
         this.name = name;
         this.description = description;
         this.projectArea = projectArea;
-//        this.creationDate = creationDate;
-        this.projectStatus = projectStatus;
+        this.projectStatus = ProjectStatus.EM_ANDAMENTO;
     }
-
-//    public Date getCreationDate() {
-//        return creationDate;
-//    }
-//
-//    public void setCreationDate(Date creationDate) {
-//        this.creationDate = creationDate;
-//    }
 
     public Long getId() {
         return Id;
