@@ -1,5 +1,5 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,24 +12,26 @@
     <div class="row">
         <h1>Criando um Projeto</h1>
     </div>
+    <div class="container">
     <div class="row">
-        <form action="/projects" method="post">
+        <form th:object="${newProjectDTO}" action="/projects" method="POST">
             <div class="form-group">
-                <label class="form-label">Nome do Projeto</label>
-                <input class="form-control" type="text" name="name" placeholder="Digite algo...">
+                <label class="form-label" >Nome do Projeto</label>
+                <input class="form-control" type="text" required th:field="*{name}" placeholder="Digite algo...">
             </div>
             <div class="form-group">
                 <label class="form-label">Descrição</label>
-                <input class="form-control" type="text" name="description" placeholder="Digite algo...">
+                <input class="form-control" type="text" required th:field="*{description}" placeholder="Digite algo...">
             </div>
             <div class="form-group">
                 <label class="form-label">Área do Projeto</label>
-                <select class="form-select" name="projectArea">
+                <select class="form-select" th:field="*{projectArea}">
                     <option th:each="area : ${projectArea}" th:value="${area}" th:text="${area}"></option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
+    </div>
     </div>
 </div>
 </body>

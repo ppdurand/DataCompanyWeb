@@ -2,9 +2,15 @@ package com.example.DataCompanyWeb.DTO;
 
 import com.example.DataCompanyWeb.models.Project;
 import com.example.DataCompanyWeb.models.ProjectArea;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class NewProjectDTO {
+    @NotBlank
+    @NotNull
     private String name;
+    @NotBlank
+    @NotNull
     private String description;
     private ProjectArea projectArea;
 
