@@ -40,6 +40,7 @@ public class ProjectController {
     public ModelAndView CreateProject(@Valid NewProjectDTO newProject, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             ModelAndView mv = new ModelAndView("projects/new");
+            mv.addObject("projectArea", ProjectArea.values());
             return mv;
         }
 

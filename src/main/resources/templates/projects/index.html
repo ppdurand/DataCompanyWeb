@@ -10,41 +10,40 @@
 <body>
 <div class="container">
     <div class="row"><
-    <h1>Lista de Projetos</h1>
-    <div class="row"><
-        <div class="col-12">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Área</th>
-                    <th scope="col">Status</th>
-<!--                    <th scope="col">Data de Criação</th>-->
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="project : ${projects}">
-                    <th class="col-1" scope="row" th:text="${project.getId()}">ID</th>
-                    <td class="col-4" th:text="${project.getName()}">Nome do Projeto</td>
-                    <td class="col-2" th:text="${project.getProjectArea()}">Área</td>
-                    <td class="col-2" th:text="${project.getProjectStatus()}">Status</td>
-<!--                    <td class="col-1" th:text="${project.getCreationDate()}">Criação</td>-->
-                    <td class="col-1"><a href="#">Detalhes</a></td>
-                    <td class="col-1"><a href="#">Editar</a></td>
-                    <td class="col-1"><a href="#">Deletar</a></td>
-                </tr>
-                </tbody>
-            </table>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-                    crossorigin="anonymous"></script>
-        </div>
-    </div>
-        <a href="/projects/new">Adicionar um Projeto</a>
+        <h1>Lista de Projetos</h1><
+    <a href="/projects/new">Adicionar um Projeto</a>
+</div>
+<div class="row"><
+    <div class="col-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Área</th>
+                <th scope="col">Status</th>
+                <!--                    <th scope="col">Data de Criação</th>-->
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projects}">
+                <th class="col-1" scope="row" th:text="${project.getId()}">ID</th>
+                <td class="col-4" th:text="${project.getName()}">Nome do Projeto</td>
+                <td class="col-2" th:text="${project.getProjectArea()}">Área</td>
+                <td class="col-2" th:text="${project.getProjectStatus()}">Status</td>
+                <!--                    <td class="col-1" th:text="${project.getCreationDate()}">Criação</td>-->
+                <td class="col-1"><a href="#">Detalhes</a></td>
+                <td class="col-1"><a href="#">Editar</a></td>
+                <td class="col-1"><a href="#">Deletar</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                crossorigin="anonymous"></script>
     </div>
 </div>
 </body>
