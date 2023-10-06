@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,5 +49,11 @@ public class ProjectController {
         project.setProjectStatus(ProjectStatus.EM_ANDAMENTO);
         this.projectRepository.save(project);
         return new ModelAndView("redirect:/projects");
+    }
+
+    @GetMapping("projects/{id}")
+    public ModelAndView show(@PathVariable Long id){
+        ModelAndView mv = new ModelAndView("projects/show");
+        return mv;
     }
 }
