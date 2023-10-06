@@ -8,6 +8,24 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
+  <main>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1><span th:text="${project.getName()}"></span></h1>
+                <b>Descrição:</b> <span th:text="${project.getDescription()}"></span><br/>
+                <b>Área:</b> <span th:text="${project.getProjectArea()}"></span><br/>
+                <b>Status:</b> <span th:text="${project.getProjectStatus()}"></span><br/>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="/projects">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </main>
 
 </body>
 </html>

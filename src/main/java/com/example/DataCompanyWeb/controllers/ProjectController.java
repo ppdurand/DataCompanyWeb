@@ -6,6 +6,7 @@ import com.example.DataCompanyWeb.models.Project;
 import com.example.DataCompanyWeb.models.ProjectArea;
 import com.example.DataCompanyWeb.models.ProjectStatus;
 import com.example.DataCompanyWeb.repository.ProjectRepository;
+import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProjectController {
@@ -53,7 +55,16 @@ public class ProjectController {
 
     @GetMapping("projects/{id}")
     public ModelAndView show(@PathVariable Long id){
-        ModelAndView mv = new ModelAndView("projects/show");
-        return mv;
+        Optional<Project> optional = this.projectRepository.findById(id);
+        if(optional.isPresent()){
+            Project project = optional.get();
+            ModelAndView mv = new ModelAndView("/projects/show");
+            mv.addObject("project", project);
+            return mv;
+        }
+        else {
+            ModelAndView mv = new ModelAndView("redirect:/projects");
+            return mv;
+        }
     }
 }
