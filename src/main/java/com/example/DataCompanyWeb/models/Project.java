@@ -26,6 +26,13 @@ public class Project {
         this.projectStatus = ProjectStatus.EM_ANDAMENTO;
     }
 
+    public Project(String name, String description, ProjectArea projectArea, ProjectStatus projectStatus) {
+        this.name = name;
+        this.description = description;
+        this.projectArea = projectArea;
+        this.projectStatus = projectStatus;
+    }
+
     public Long getId() {
         return Id;
     }

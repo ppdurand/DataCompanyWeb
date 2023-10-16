@@ -2,10 +2,11 @@ package com.example.DataCompanyWeb.DTO;
 
 import com.example.DataCompanyWeb.models.Project;
 import com.example.DataCompanyWeb.models.ProjectArea;
+import com.example.DataCompanyWeb.models.ProjectStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class NewProjectDTO {
+public class EditProjectDTO {
     @NotBlank
     @NotNull
     private String name;
@@ -13,6 +14,15 @@ public class NewProjectDTO {
     @NotNull
     private String description;
     private ProjectArea projectArea;
+    private ProjectStatus projectStatus;
+
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(ProjectStatus projectStatus) {
+        this.projectStatus = projectStatus;
+    }
 
     public String getName() {
         return name;
@@ -38,8 +48,10 @@ public class NewProjectDTO {
         this.projectArea = projectArea;
     }
 
-    public Project toProject(){
-        Project project = new Project(this.name, this.description, this.projectArea);
-        return project;
+    public void FromProject(Project project){
+        this.name = project.getName();
+        this.description = project.getDescription();
+        this.projectArea = project.getProjectArea();
+        this.projectStatus = project.getProjectStatus();
     }
 }
