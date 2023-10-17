@@ -1,8 +1,8 @@
 package com.example.DataCompanyWeb.DTO;
 
 import com.example.DataCompanyWeb.models.Project;
-import com.example.DataCompanyWeb.models.ProjectArea;
-import com.example.DataCompanyWeb.models.ProjectStatus;
+import com.example.DataCompanyWeb.enums.ProjectArea;
+import com.example.DataCompanyWeb.enums.ProjectStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

@@ -1,8 +1,8 @@
 package com.example.DataCompanyWeb.models;
 
+import com.example.DataCompanyWeb.enums.ProjectArea;
+import com.example.DataCompanyWeb.enums.ProjectStatus;
 import jakarta.persistence.*;
-
-import java.util.Date;
 
 @Entity
 public class Project {
