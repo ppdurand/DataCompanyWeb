@@ -1,54 +1,38 @@
-package com.example.DataCompanyWeb.models;
+package com.example.DataCompanyWeb.DTO;
 
 import com.example.DataCompanyWeb.enums.CollaboratorFunction;
 import com.example.DataCompanyWeb.enums.CollaboratorType;
+import com.example.DataCompanyWeb.models.Collaborator;
+import com.example.DataCompanyWeb.models.Project;
+import com.example.DataCompanyWeb.repository.ProjectRepository;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Optional;
 
-@Entity
-public class Collaborator {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false)
+public class NewCollaboratorDTO {
+    private ProjectRepository projectRepository;
+
+    @NotBlank
+    @NotNull
     private String name;
-    @Column(nullable = false)
+    @NotBlank
+    @NotNull
     private String lastName;
-    @Column(nullable = false)
+    @NotBlank
+    @NotNull
     private Timestamp birthdayDate;
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
-    @Enumerated(EnumType.STRING)
+    @NotBlank
+    @NotNull
+    private Long projectId;
     private CollaboratorType collaboratorType;
-    @Enumerated(EnumType.STRING)
     private CollaboratorFunction collaboratorFunction;
-    @Column(nullable = false)
+    @NotBlank
+    @NotNull
     private BigDecimal salary;
-
-
-    public Collaborator() {}
-    public Collaborator(String name, String lastName, Timestamp birthdayDate, Project project, CollaboratorType collaboratorType, CollaboratorFunction collaboratorFunction, BigDecimal salary) {
-        this.name = name;
-        this.lastName = lastName;
-        this.birthdayDate = birthdayDate;
-        this.project = project;
-        this.collaboratorType = collaboratorType;
-        this.collaboratorFunction = collaboratorFunction;
-        this.salary = salary;
-    }
-
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -74,12 +58,12 @@ public class Collaborator {
         this.birthdayDate = birthdayDate;
     }
 
-    public Project getProject() {
-        return project;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     public CollaboratorType getCollaboratorType() {
@@ -104,5 +88,17 @@ public class Collaborator {
 
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
+    }
+
+    public Collaborator toCollaborator() {
+        Optional<Project> optional = projectRepository.findById(this.projectId);
+        Project project = null;
+        if (optional.isPresent()) {
+            project = optional.get();
+        }
+
+        Collaborator collaborator = new Collaborator(this.name, this.lastName, this.birthdayDate, project,
+                                                    this.collaboratorType, this.collaboratorFunction, this.salary);
+        return collaborator;
     }
 }

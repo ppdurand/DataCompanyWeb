@@ -9,11 +9,11 @@
 </head>
 <body>
 <div class="container">
-    <div class="row"><
-        <h1>Lista de Projetos</h1><
+    <div class="row">
+        <h1>Lista de Projetos</h1>
     <a href="/projects/new">Adicionar um Projeto</a>
-</div>
-<div class="row"><
+    </div>
+<div class="row">
     <div class="col-12">
         <table class="table">
             <thead>
@@ -22,7 +22,6 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Área</th>
                 <th scope="col">Status</th>
-                <!--                    <th scope="col">Data de Criação</th>-->
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -34,7 +33,6 @@
                 <td class="col-4" th:text="${project.getName()}">Nome do Projeto</td>
                 <td class="col-2" th:text="${project.getProjectArea()}">Área</td>
                 <td class="col-2" th:text="${project.getProjectStatus()}">Status</td>
-                <!--                    <td class="col-1" th:text="${project.getCreationDate()}">Criação</td>-->
                 <td class="col-1"><a th:href="@{/projects/{id}(id = ${project.id})}">Detalhes</a></td>
                 <td class="col-1"><a th:href="@{/projects/{id}/edit(id = ${project.id})}">Editar</a></td>
                 <td class="col-1"><a th:href="@{/projects/{id}/delete(id = ${project.id})}">Deletar</a></td>
@@ -45,6 +43,7 @@
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
                 crossorigin="anonymous"></script>
     </div>
+</div>
 </div>
 </body>
 </html>
