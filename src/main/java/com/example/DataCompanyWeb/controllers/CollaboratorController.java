@@ -7,10 +7,13 @@ import com.example.DataCompanyWeb.models.Collaborator;
 import com.example.DataCompanyWeb.models.Project;
 import com.example.DataCompanyWeb.repository.CollaboratorRepository;
 import com.example.DataCompanyWeb.repository.ProjectRepository;
+import jakarta.validation.Valid;
 import org.hibernate.query.sql.spi.ParameterOccurrence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,12 +29,9 @@ public class CollaboratorController {
     private ProjectRepository projectRepository;
     @GetMapping
     public ModelAndView index(){
-        Optional<List<Collaborator>> optional = Optional.ofNullable(this.collaboratorRepository.findAll());
-        if(optional.isEmpty()){
-            return new ModelAndView("redirect:/collaborators/new");
-        }
+        List<Collaborator> collaborators = this.collaboratorRepository.findAll();
         ModelAndView mv = new ModelAndView("collaborators/index");
-        mv.addObject("collaborator", optional);
+        mv.addObject("collaborators", collaborators);
         return mv;
     }
 
@@ -43,6 +43,20 @@ public class CollaboratorController {
         mv.addObject("collaboratorFunction", CollaboratorFunction.values());
         mv.addObject("projects", projectRepository.findAll());
         return mv;
+    }
+
+    @PostMapping()
+    public ModelAndView CreateCollaborator(@Valid NewCollaboratorDTO newCollaborator, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            ModelAndView mv = new ModelAndView("redirect:/collaborators/new");
+            mv.addObject("collaboratorType", CollaboratorType.values());
+            mv.addObject("collaboratorFunction", CollaboratorFunction.values());
+            mv.addObject("projects", projectRepository.findAll());
+            return mv;
+        }
+        Collaborator collaborator = newCollaborator.toCollaborator();
+        collaboratorRepository.save(collaborator);
+        return new ModelAndView("redirect:/collaborators");
     }
 
 }

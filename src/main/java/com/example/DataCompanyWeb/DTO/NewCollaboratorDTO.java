@@ -8,9 +8,11 @@ import com.example.DataCompanyWeb.repository.ProjectRepository;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Optional;
 
 public class NewCollaboratorDTO {
@@ -22,15 +24,10 @@ public class NewCollaboratorDTO {
     @NotBlank
     @NotNull
     private String lastName;
-    @NotBlank
     @NotNull
-    private Timestamp birthdayDate;
-    @NotBlank
-    @NotNull
-    private Long projectId;
+    private Project project;
     private CollaboratorType collaboratorType;
     private CollaboratorFunction collaboratorFunction;
-    @NotBlank
     @NotNull
     private BigDecimal salary;
 
@@ -50,20 +47,12 @@ public class NewCollaboratorDTO {
         this.lastName = lastName;
     }
 
-    public Timestamp getBirthdayDate() {
-        return birthdayDate;
+    public Project getProjectId() {
+        return project;
     }
 
-    public void setBirthdayDate(Timestamp birthdayDate) {
-        this.birthdayDate = birthdayDate;
-    }
-
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
+    public void setProjectId(Project project) {
+        this.project = project;
     }
 
     public CollaboratorType getCollaboratorType() {
@@ -91,14 +80,8 @@ public class NewCollaboratorDTO {
     }
 
     public Collaborator toCollaborator() {
-        Optional<Project> optional = projectRepository.findById(this.projectId);
-        Project project = null;
-        if (optional.isPresent()) {
-            project = optional.get();
-        }
-
-        Collaborator collaborator = new Collaborator(this.name, this.lastName, this.birthdayDate, project,
-                                                    this.collaboratorType, this.collaboratorFunction, this.salary);
+        Collaborator collaborator = new Collaborator(this.name, this.lastName, this.project,
+                this.collaboratorType, this.collaboratorFunction, this.salary);
         return collaborator;
     }
 }

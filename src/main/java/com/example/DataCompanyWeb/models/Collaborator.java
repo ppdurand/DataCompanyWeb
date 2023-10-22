@@ -5,6 +5,7 @@ import com.example.DataCompanyWeb.enums.CollaboratorType;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -16,8 +17,6 @@ public class Collaborator {
     private String name;
     @Column(nullable = false)
     private String lastName;
-    @Column(nullable = false)
-    private Timestamp birthdayDate;
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
@@ -30,10 +29,9 @@ public class Collaborator {
 
 
     public Collaborator() {}
-    public Collaborator(String name, String lastName, Timestamp birthdayDate, Project project, CollaboratorType collaboratorType, CollaboratorFunction collaboratorFunction, BigDecimal salary) {
+    public Collaborator(String name, String lastName, Project project, CollaboratorType collaboratorType, CollaboratorFunction collaboratorFunction, BigDecimal salary) {
         this.name = name;
         this.lastName = lastName;
-        this.birthdayDate = birthdayDate;
         this.project = project;
         this.collaboratorType = collaboratorType;
         this.collaboratorFunction = collaboratorFunction;
@@ -64,14 +62,6 @@ public class Collaborator {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Timestamp getBirthdayDate() {
-        return birthdayDate;
-    }
-
-    public void setBirthdayDate(Timestamp birthdayDate) {
-        this.birthdayDate = birthdayDate;
     }
 
     public Project getProject() {
