@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,6 +57,18 @@ public class CollaboratorController {
         }
         Collaborator collaborator = newCollaborator.toCollaborator();
         collaboratorRepository.save(collaborator);
+        return new ModelAndView("redirect:/collaborators");
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView ShowDetails(@PathVariable Long id){
+        Optional<Collaborator> optional = this.collaboratorRepository.findById(id);
+        if(optional.isPresent()){
+            Collaborator collaborator = optional.get();
+            ModelAndView mv = new ModelAndView("collaborators/show");
+            mv.addObject("collaborator", collaborator);
+            return mv;
+        }
         return new ModelAndView("redirect:/collaborators");
     }
 

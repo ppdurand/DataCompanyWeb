@@ -26,10 +26,10 @@
         <tbody>
         <tr th:each="collaborator : ${collaborators}">
             <th class="col-1" scope="row" th:text="${collaborator.getId()}">ID</th>
-            <th class="col-1" scope="row" th:text="${collaborator.getName() + ' ' + collaborator.getLastName()}">Nome</th>
-            <th class="col-1" scope="row" th:text="${collaborator.getCollaboratorFunction()}">Cargo</th>
-            <th class="col-1" scope="row" th:text="${collaborator.getCollaboratorType()}">Tipo de Contrato</th>
-            <th class="col-1" scope="row" th:text="${collaborator.getProject().getName()}">Tipo de Contrato</th>
+            <th class="col-1" th:text="${collaborator.getName() + ' ' + collaborator.getLastName()}">Nome</th>
+            <th class="col-1" th:text="${collaborator.getCollaboratorFunction()}">Cargo</th>
+            <th class="col-1" th:text="${collaborator.getCollaboratorType()}">Tipo de Contrato</th>
+            <th class="col-1" th:text="${collaborator.getProject().getName()}">Tipo de Contrato</th>
 
         </tr>
         </tbody>
