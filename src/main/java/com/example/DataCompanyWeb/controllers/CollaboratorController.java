@@ -71,5 +71,4 @@ public class CollaboratorController {
         }
         return new ModelAndView("redirect:/collaborators");
     }
-
 }

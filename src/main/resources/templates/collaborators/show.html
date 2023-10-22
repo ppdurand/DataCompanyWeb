@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detalhes do Colaborador</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+<main>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-12">
+        <h1><span th:text="${collaborator.getName() + ' ' + collaborator.getLastName()}"></span></h1>
+        <b>Salário:</b> <span th:text="${collaborator.getSalary()}"></span><br/>
+        <b>Projeto Atual:</b> <span th:text="${collaborator.getProject().getName()}"></span><br/>
+        <b>Função:</b> <span th:text="${collaborator.getCollaboratorFunction()}"></span><br/>
+        <b>Contrato:</b> <span th:text="${collaborator.getCollaboratorType()}"></span><br/>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <a href="/collaborators">Voltar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>
