@@ -49,7 +49,7 @@ public class CollaboratorController {
     @PostMapping()
     public ModelAndView CreateCollaborator(@Valid NewCollaboratorDTO newCollaborator, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            ModelAndView mv = new ModelAndView("redirect:/collaborators/new");
+            ModelAndView mv = new ModelAndView("collaborators/new");
             mv.addObject("collaboratorType", CollaboratorType.values());
             mv.addObject("collaboratorFunction", CollaboratorFunction.values());
             mv.addObject("projects", projectRepository.findAll());
