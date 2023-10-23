@@ -22,6 +22,7 @@
             <th scope="col">Tipo de Contrato</th>
             <th scope="col">Projeto Atual</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
             <td class="col-1" th:text="${collaborator.getCollaboratorType()}">Tipo de Contrato</td>
             <td class="col-1" th:text="${collaborator.getProject().getName()}">Tipo de Contrato</td>
             <td class="col-1"><a th:href="@{/collaborators/{id}(id = ${collaborator.getId()})}">Detalhes</td>
+            <td class="col-1"><a th:href="@{/collaborators/{id}/edit(id = ${collaborator.getId()})}">Editar</td>
 
         </tr>
         </tbody>
