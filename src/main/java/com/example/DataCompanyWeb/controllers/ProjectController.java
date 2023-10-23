@@ -1,7 +1,9 @@
 package com.example.DataCompanyWeb.controllers;
 
 
+import com.example.DataCompanyWeb.DTO.EditProjectDTO;
 import com.example.DataCompanyWeb.DTO.NewProjectDTO;
+import com.example.DataCompanyWeb.enums.ProjectStatus;
 import com.example.DataCompanyWeb.models.Project;
 import com.example.DataCompanyWeb.enums.ProjectArea;
 import com.example.DataCompanyWeb.repository.ProjectRepository;
@@ -70,14 +72,14 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
-    /*@GetMapping("/{id}/edit")
-    public ModelAndView edit(@PathVariable Long id, EditProjectDTO editProjectDTO){
+    @GetMapping("/{id}/edit")
+    public ModelAndView EditProject(@PathVariable Long id, EditProjectDTO editProjectDTO){
         Optional<Project> optional = this.projectRepository.findById(id);
         if(optional.isPresent()){
             Project project = optional.get();
-            editProjectDTO.FromProject(project);
+            editProjectDTO.fromProject(project);
 
-            ModelAndView mv = new ModelAndView("/projects/edit");
+            ModelAndView mv = new ModelAndView("projects/edit");
             mv.addObject("editProjectDTO", editProjectDTO);
             mv.addObject("projectArea", ProjectArea.values());
             mv.addObject("projectStatus", ProjectStatus.values());
@@ -92,27 +94,21 @@ public class ProjectController {
     @PostMapping("/{id}")
     public ModelAndView Update(@PathVariable Long id, @Valid EditProjectDTO editProject, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            ModelAndView mv = new ModelAndView("home");
+            ModelAndView mv = new ModelAndView("projects/new");
             mv.addObject("projectArea", ProjectArea.values());
-            System.out.println("AAAAAAAa");
             return mv;
         }
         else{
             Optional<Project> optional = this.projectRepository.findById(id);
 
             if(optional.isPresent()){
-                Project project = optional.get();
-
-                project.setName(editProject.getName());
-                project.setDescription(editProject.getDescription());
-                project.setProjectArea(editProject.getProjectArea());
-                project.setProjectStatus(editProject.getProjectStatus());
-
+                Project project = editProject.toProject(optional.get());
+                this.projectRepository.save(project);
                 return new ModelAndView("redirect:/projects");
             }
             else {
                 return new ModelAndView("redirect:/projects");
             }
         }
-    }*/
+    }
 }

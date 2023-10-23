@@ -14,7 +14,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <form th:object="${editProjectDTO}" th:action="@{projects/{id}(id = ${id})}" method="POST">
+            <form th:object="${editProjectDTO}" th:action="@{projects/{projectId}(projectId = ${id})}" method="POST">
                 <div class="form-group">
                     <label class="form-label" >Nome do Projeto</label>
                     <input class="form-control" th:errorclass="is-invalid" type="text" th:field="*{name}" placeholder="Digite algo...">

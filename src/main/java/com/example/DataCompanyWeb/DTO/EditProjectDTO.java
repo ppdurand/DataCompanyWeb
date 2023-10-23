@@ -48,10 +48,19 @@ public class EditProjectDTO {
         this.projectArea = projectArea;
     }
 
-    public void FromProject(Project project){
+    public void fromProject(Project project){
         this.name = project.getName();
         this.description = project.getDescription();
         this.projectArea = project.getProjectArea();
         this.projectStatus = project.getProjectStatus();
+    }
+
+    public Project toProject(Project project){
+        project.setName(this.getName());
+        project.setDescription(this.getDescription());
+        project.setProjectArea(this.getProjectArea());
+        project.setProjectStatus(this.getProjectStatus());
+
+        return project;
     }
 }
