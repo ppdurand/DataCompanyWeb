@@ -114,7 +114,12 @@ public class CollaboratorController {
             else{
                 return new ModelAndView("redirect:/collaborators");
             }
-
         }
+    }
+
+    @GetMapping("{id}/delete")
+    public ModelAndView DeleteCollaborator(@PathVariable Long id){
+        this.collaboratorRepository.deleteById(id);
+        return new ModelAndView("redirect:/collaborators");
     }
 }
