@@ -59,7 +59,6 @@ public class CollaboratorService {
 
         return mv;
     }
-    
 
     public ModelAndView PostCollaborator(NewCollaboratorDTO newCollaboratorDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
