@@ -41,6 +41,7 @@ public class ProjectService {
 
     public ModelAndView CreateProject(){
         ModelAndView mv = new ModelAndView("projects/new");
+        mv.addObject("newProjectDTO", new NewProjectDTO());
         mv.addObject("projectArea", ProjectArea.values());
         return mv;
     }
