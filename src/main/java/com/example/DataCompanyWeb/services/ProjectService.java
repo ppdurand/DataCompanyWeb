@@ -5,7 +5,9 @@ import com.example.DataCompanyWeb.DTO.NewCollaboratorDTO;
 import com.example.DataCompanyWeb.DTO.NewProjectDTO;
 import com.example.DataCompanyWeb.enums.ProjectArea;
 import com.example.DataCompanyWeb.enums.ProjectStatus;
+import com.example.DataCompanyWeb.models.Collaborator;
 import com.example.DataCompanyWeb.models.Project;
+import com.example.DataCompanyWeb.repository.CollaboratorRepository;
 import com.example.DataCompanyWeb.repository.ProjectRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,6 +24,8 @@ public class ProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
+    @Autowired
+    private CollaboratorRepository collaboratorRepository;
     public ModelAndView GetAll(){
         ModelAndView mv = new ModelAndView("projects/index");
         mv.addObject("projects", this.projectRepository.findAll());
@@ -30,8 +35,19 @@ public class ProjectService {
     public ModelAndView GetById(Long id){
         Optional<Project> optional = this.projectRepository.findById(id);
         if(optional.isPresent()){
+            List<Collaborator> collaborators = this.collaboratorRepository.findAll();
+            int qtdCollaborators = 0;
+
+            for(int i = 1; i <= this.collaboratorRepository.findAll().size() - 1; i++){
+                Collaborator collaborator = collaborators.get(i);
+                if(collaborator.getProject() == optional.get()){
+                    qtdCollaborators++;
+                }
+            }
+
             ModelAndView mv = new ModelAndView("projects/show");
             mv.addObject("project", optional.get());
+            mv.addObject("collaborators", qtdCollaborators);
             return mv;
         }
         else{
