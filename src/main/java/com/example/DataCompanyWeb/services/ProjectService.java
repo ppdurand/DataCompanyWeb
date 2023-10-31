@@ -73,14 +73,8 @@ public class ProjectService {
     }
 
     public ModelAndView DeleteProject(Long id){
-        Optional<Project> optional = this.projectRepository.findById(id);
-        if(optional.isPresent()){
             this.projectRepository.deleteById(id);
             return new ModelAndView("redirect:/projects");
-        }
-        else{
-            return new ModelAndView("redirect:/projects");
-        }
     }
 
     public ModelAndView EditProject(Long id, EditProjectDTO editProject){
