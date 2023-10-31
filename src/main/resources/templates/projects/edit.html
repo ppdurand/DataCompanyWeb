@@ -16,24 +16,24 @@
         <div class="row">
             <form th:object="${editProjectDTO}" th:action="@{projects/{projectId}(projectId = ${id})}" method="POST">
                 <div class="form-group">
-                    <label class="form-label" >Nome do Projeto</label>
-                    <input class="form-control" th:errorclass="is-invalid" type="text" th:field="*{name}" placeholder="Digite algo...">
+                    <label for="nomeProjeto" class="form-label" >Nome do Projeto</label>
+                    <input id="nomeProjeto" class="form-control" th:errorclass="is-invalid" type="text" th:field="*{name}" placeholder="Digite algo...">
                     <div class="invalid-feedback" th:errors="*{name}"></div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Descrição</label>
-                    <input class="form-control" th:errorclass="is-invalid" type="text" th:field="*{description}" placeholder="Digite algo...">
+                    <label for="descricaoProjeto" class="form-label">Descrição</label>
+                    <input id="descricaoProjeto" class="form-control" th:errorclass="is-invalid" type="text" th:field="*{description}" placeholder="Digite algo...">
                     <div class="invalid-feedback" th:errors="*{description}"></div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Área do Projeto</label>
-                    <select class="form-select" th:field="*{projectArea}">
+                    <label for="areaProjeto" class="form-label">Área do Projeto</label>
+                    <select id="areaProjeto" class="form-select" th:field="*{projectArea}">
                         <option th:each="area : ${projectArea}" th:value="${area}" th:text="${area}"></option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Status do Projeto</label>
-                    <select class="form-select" th:field="*{projectStatus}">
+                    <label for="statusProjeto" class="form-label">Status do Projeto</label>
+                    <select id="statusProjeto" class="form-select" th:field="*{projectStatus}">
                         <option th:each="status : ${projectStatus}" th:value="${status}" th:text="${status}"></option>
                     </select>
                 </div>
