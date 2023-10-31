@@ -22,8 +22,11 @@
 </Header>
 </ul>
 <h2>Navegue pelas guias</h2>
-<p>Temos no total de <th class="col-1" scope="row" th:text="${projects}"></th> projetos</p>
-<p>Temos <th class="col-1" scope="row" th:text="${collaborators}"></th> pessoas trabalhando conosco</p>
+<p th:if="${projects != null}">Temos no total de <span th:text="${projects}"></span> projeto(s)</p>
+<p th:unless="${projects != null}">Cadastre Projetos</p>
+
+<p th:if="${collaborators != null}">Temos <span th:text="${collaborators}"></span> pessoa(s) trabalhando conosco</p>
+<p th:unless="${collaborators != null}">Cadastre Colaboradores</p>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

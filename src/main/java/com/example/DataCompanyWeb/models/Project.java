@@ -19,11 +19,12 @@ public class Project {
     private ProjectStatus projectStatus;
     public Project() {}
 
+    //Construtor sendo iniciado
     public Project(String name, String description, ProjectArea projectArea) {
         this.name = name;
         this.description = description;
         this.projectArea = projectArea;
-        this.projectStatus = ProjectStatus.EM_ANDAMENTO;
+        this.projectStatus = ProjectStatus.EM_ESPERA;
     }
 
     public Project(String name, String description, ProjectArea projectArea, ProjectStatus projectStatus) {

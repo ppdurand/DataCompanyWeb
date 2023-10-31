@@ -39,12 +39,16 @@
         </tr>
         </thead>
         <tbody>
+        <tr th:if="${#lists.isEmpty(collaborators)}">
+            <td colspan="7">Nenhum colaborador encontrado.</td>
+        </tr>
         <tr th:each="collaborator : ${collaborators}">
             <th class="col-1" scope="row" th:text="${collaborator.getId()}">ID</th>
             <td class="col-1" th:text="${collaborator.getName() + ' ' + collaborator.getLastName()}">Nome</td>
             <td class="col-1" th:text="${collaborator.getCollaboratorFunction()}">Cargo</td>
             <td class="col-1" th:text="${collaborator.getCollaboratorType()}">Tipo de Contrato</td>
-            <td class="col-1" th:text="${collaborator.getProject().getName()}">Tipo de Contrato</td>
+            <td class="col-1" th:if="${collaborator.getProject() != null}" th:text="${collaborator.getProject().getName()}">Nome do Projeto</td>
+            <td class="col-1" th:if="${collaborator.getProject() == null}">Nenhum projeto associado</td>
             <td class="col-1"><a th:href="@{/collaborators/{id}(id = ${collaborator.getId()})}">Detalhes</td>
             <td class="col-1"><a th:href="@{/collaborators/{id}/edit(id = ${collaborator.getId()})}">Editar</td>
             <td class="col-1"><a th:href="@{/collaborators/{id}/delete(id = ${collaborator.getId()})}">Demitir</td>
