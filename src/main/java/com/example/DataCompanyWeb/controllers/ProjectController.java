@@ -38,7 +38,7 @@ public class ProjectController {
 
     @PostMapping()
     public ModelAndView CreateProject(@Valid NewProjectDTO newProject, BindingResult bindingResult){
-        return this.projectService.PostProject(newProject, bindingResult);
+        return this.projectService.Post(newProject, bindingResult);
     }
 
     @GetMapping("/{id}")
@@ -48,7 +48,7 @@ public class ProjectController {
 
     @GetMapping("/{id}/delete")
     public ModelAndView Delete(@PathVariable  Long id){
-        return this.projectService.DeleteProject(id);
+        return this.projectService.Delete(id);
     }
 
     @GetMapping("/{id}/edit")
@@ -58,6 +58,6 @@ public class ProjectController {
 
     @PostMapping("/{id}")
     public ModelAndView Update(@PathVariable Long id, @Valid EditProjectDTO editProject, BindingResult bindingResult){
-        return this.projectService.UpdateProject(id, editProject, bindingResult);
+        return this.projectService.Update(id, editProject, bindingResult);
     }
 }

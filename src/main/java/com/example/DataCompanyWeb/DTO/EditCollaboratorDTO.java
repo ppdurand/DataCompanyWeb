@@ -16,7 +16,6 @@ public class EditCollaboratorDTO {
     @NotBlank
     @NotNull
     private String lastName;
-    @NotNull
     private Project project;
     private CollaboratorType collaboratorType;
     private CollaboratorFunction collaboratorFunction;

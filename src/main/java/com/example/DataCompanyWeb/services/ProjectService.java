@@ -9,6 +9,7 @@ import com.example.DataCompanyWeb.models.Collaborator;
 import com.example.DataCompanyWeb.models.Project;
 import com.example.DataCompanyWeb.repository.CollaboratorRepository;
 import com.example.DataCompanyWeb.repository.ProjectRepository;
+import com.example.DataCompanyWeb.services.interfaces.IGenericService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,18 +21,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProjectService {
+public class ProjectService implements IGenericService<NewProjectDTO, EditProjectDTO> {
 
     @Autowired
     private ProjectRepository projectRepository;
     @Autowired
     private CollaboratorRepository collaboratorRepository;
+    @Override
     public ModelAndView GetAll(){
         ModelAndView mv = new ModelAndView("projects/index");
         mv.addObject("projects", this.projectRepository.findAll());
         return mv;
     }
 
+    @Override
     public ModelAndView GetById(Long id){
         Optional<Project> optional = this.projectRepository.findById(id);
         if(optional.isPresent()){
@@ -62,7 +65,8 @@ public class ProjectService {
         return mv;
     }
 
-    public ModelAndView PostProject(@Valid NewProjectDTO newProject, BindingResult bindingResult){
+    @Override
+    public ModelAndView Post(@Valid NewProjectDTO newProject, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             ModelAndView mv = new ModelAndView("redirect:/projects/new");
             mv.addObject("projectArea", ProjectArea.values());
@@ -72,7 +76,8 @@ public class ProjectService {
         return new ModelAndView("redirect:/projects");
     }
 
-    public ModelAndView DeleteProject(Long id){
+    @Override
+    public ModelAndView Delete(Long id){
             this.projectRepository.deleteById(id);
             return new ModelAndView("redirect:/projects");
     }
@@ -93,7 +98,8 @@ public class ProjectService {
         }
     }
 
-    public ModelAndView UpdateProject(Long id, @Valid EditProjectDTO editProject, BindingResult bindingResult){
+    @Override
+    public ModelAndView Update(Long id, @Valid EditProjectDTO editProject, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             ModelAndView mv = new ModelAndView("projects/new");
             mv.addObject("projectArea", ProjectArea.values());

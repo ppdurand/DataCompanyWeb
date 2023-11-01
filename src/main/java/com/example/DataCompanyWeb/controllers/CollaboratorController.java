@@ -41,7 +41,7 @@ public class CollaboratorController {
 
     @PostMapping()
     public ModelAndView CreateCollaborator(NewCollaboratorDTO newCollaborator, BindingResult bindingResult){
-        return this.collaboratorService.PostCollaborator(newCollaborator, bindingResult);
+        return this.collaboratorService.Post(newCollaborator, bindingResult);
     }
 
     @GetMapping("/{id}")
@@ -56,11 +56,11 @@ public class CollaboratorController {
     @PostMapping("/{id}")
     public ModelAndView UpdateCollaborator(@PathVariable Long id,@Valid EditCollaboratorDTO editCollaborator,
                                            BindingResult bindingResult){
-        return this.collaboratorService.UpdateCollaborator(id,editCollaborator, bindingResult);
+        return this.collaboratorService.Update(id,editCollaborator, bindingResult);
     }
 
     @GetMapping("{id}/delete")
     public ModelAndView DeleteCollaborator(@PathVariable Long id){
-        return this.collaboratorService.DeleteCollaborator(id);
+        return this.collaboratorService.Delete(id);
     }
 }

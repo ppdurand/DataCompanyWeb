@@ -7,6 +7,7 @@ import com.example.DataCompanyWeb.enums.CollaboratorType;
 import com.example.DataCompanyWeb.models.Collaborator;
 import com.example.DataCompanyWeb.repository.CollaboratorRepository;
 import com.example.DataCompanyWeb.repository.ProjectRepository;
+import com.example.DataCompanyWeb.services.interfaces.IGenericService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -19,11 +20,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CollaboratorService {
+public class CollaboratorService implements IGenericService<NewCollaboratorDTO, EditCollaboratorDTO> {
     @Autowired
     private CollaboratorRepository collaboratorRepository;
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Override
     public ModelAndView GetAll(){
         List<Collaborator> collaborators = this.collaboratorRepository.findAll();
         ModelAndView mv = new ModelAndView("/collaborators/index");
@@ -31,6 +34,7 @@ public class CollaboratorService {
         return mv;
     }
 
+    @Override
     public ModelAndView GetById(Long id){
         Optional<Collaborator> optional = this.collaboratorRepository.findById(id);
         if(optional.isPresent()){
@@ -53,6 +57,7 @@ public class CollaboratorService {
     public ModelAndView CreateCollaborator(){
         ModelAndView mv = new ModelAndView("collaborators/new");
 
+        mv.addObject("newCollaboratorDTO", new NewCollaboratorDTO());
         mv.addObject("collaboratorType", CollaboratorType.values());
         mv.addObject("collaboratorFunction", CollaboratorFunction.values());
         mv.addObject("projects", projectRepository.findAll());
@@ -60,10 +65,12 @@ public class CollaboratorService {
         return mv;
     }
 
-    public ModelAndView PostCollaborator(NewCollaboratorDTO newCollaboratorDTO, BindingResult bindingResult){
+    @Override
+    public ModelAndView Post(NewCollaboratorDTO newCollaboratorDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             ModelAndView mv = new ModelAndView("collaborator/new");
 
+            mv.addObject("newCollaboratorDTO", new NewCollaboratorDTO());
             mv.addObject("collaboratorType", CollaboratorType.values());
             mv.addObject("collaboratorFunction", CollaboratorFunction.values());
             mv.addObject("projects", this.projectRepository.findAll());
@@ -96,11 +103,13 @@ public class CollaboratorService {
         }
     }
 
-    public ModelAndView UpdateCollaborator(Long id, @Valid EditCollaboratorDTO editCollaborator,
+    @Override
+    public ModelAndView Update(Long id, @Valid EditCollaboratorDTO editCollaborator,
                                            BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             ModelAndView mv = new ModelAndView("collaborators/new");
 
+            mv.addObject("newCollaboratorDTO", new NewCollaboratorDTO());
             mv.addObject("collaboratorType", CollaboratorType.values());
             mv.addObject("collaboratorFunction", CollaboratorFunction.values());
             mv.addObject("projects", projectRepository.findAll());
@@ -119,7 +128,8 @@ public class CollaboratorService {
         }
     }
 
-    public ModelAndView DeleteCollaborator(Long id){
+    @Override
+    public ModelAndView Delete(Long id){
         Optional<Collaborator> optional = this.collaboratorRepository.findById(id);
         if(optional.isPresent()){
             this.collaboratorRepository.deleteById(id);
