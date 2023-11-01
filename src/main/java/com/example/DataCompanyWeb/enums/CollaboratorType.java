@@ -1,5 +1,5 @@
 package com.example.DataCompanyWeb.enums;
 
 public enum CollaboratorType {
-    CLT, ESTAGIARIO, JOVEM_APRENDIZ
+    CLT, ESTAGIARIO, FREE_LANCER, JOVEM_APRENDIZ, PJ
 }
