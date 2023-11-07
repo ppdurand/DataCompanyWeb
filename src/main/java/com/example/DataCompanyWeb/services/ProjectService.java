@@ -10,6 +10,7 @@ import com.example.DataCompanyWeb.models.Project;
 import com.example.DataCompanyWeb.repository.CollaboratorRepository;
 import com.example.DataCompanyWeb.repository.ProjectRepository;
 import com.example.DataCompanyWeb.services.interfaces.IGenericService;
+import jakarta.persistence.NoResultException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +67,7 @@ public class ProjectService implements IGenericService<NewProjectDTO, EditProjec
     }
 
     @Override
-    public ModelAndView Post(@Valid NewProjectDTO newProject, BindingResult bindingResult){
+    public ModelAndView Post(NewProjectDTO newProject, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             ModelAndView mv = new ModelAndView("redirect:/projects/new");
             mv.addObject("projectArea", ProjectArea.values());
@@ -78,8 +79,8 @@ public class ProjectService implements IGenericService<NewProjectDTO, EditProjec
 
     @Override
     public ModelAndView Delete(Long id){
-            this.projectRepository.deleteById(id);
-            return new ModelAndView("redirect:/projects");
+        this.projectRepository.deleteById(id);
+        return new ModelAndView("redirect:/projects");
     }
 
     public ModelAndView EditProject(Long id, EditProjectDTO editProject){
@@ -99,7 +100,7 @@ public class ProjectService implements IGenericService<NewProjectDTO, EditProjec
     }
 
     @Override
-    public ModelAndView Update(Long id, @Valid EditProjectDTO editProject, BindingResult bindingResult){
+    public ModelAndView Update(Long id, EditProjectDTO editProject, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             ModelAndView mv = new ModelAndView("projects/new");
             mv.addObject("projectArea", ProjectArea.values());

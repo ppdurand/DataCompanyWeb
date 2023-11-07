@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 public interface IGenericService<T, E> {
     ModelAndView GetAll();
     ModelAndView GetById(Long id);
-    ModelAndView Post(@Valid T entity, BindingResult bindingResult);
+    ModelAndView Post(T entity, BindingResult bindingResult);
     ModelAndView Delete(Long id);
-    ModelAndView Update(Long id, @Valid E entity, BindingResult bindingResult);
+    ModelAndView Update(Long id, E entity, BindingResult bindingResult);
 }
